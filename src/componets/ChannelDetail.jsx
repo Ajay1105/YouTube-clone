@@ -7,9 +7,8 @@ import { Videos, ChannelCard } from "./index";
 import { fetchFromApi } from "../utils/fetchFromApi";
 
 function ChannelDetail() {
-
   const { id } = useParams();
-  
+
   // let a = [];
   // fetchFromApi(`channels?part=snippet&id=${id}`).then(
   //   (data) => (a = data?.items[0])
@@ -30,14 +29,23 @@ function ChannelDetail() {
   //console.log(channelDetail,videos);
 
   return (
-    <>
-      <ChannelCard channelDetail={channelDetail} />
-      <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
-        {videos.map((item) => (
-          <Videos videos={videos} />
-        ))}
+    <Box minHeight="95vh">
+      <Box>
+        <div
+          style={{
+            background:
+              "linear-gradient(90deg,rgba(0,238,247,1) 0%, rgba(206,3,184,1) 100%, rgba(0,212,255,1) 100%",
+            zIndex: 10,
+            height: "300px",
+          }}
+        />
+        <ChannelCard channelDetail={channelDetail} marginTop="-108px" />
       </Box>
-    </>
+      <Box display="flex" p="2">
+        <Box sx={{ mr: { sm: "100px" } }} />
+        <Videos videos={videos} />
+      </Box>
+    </Box>
   );
 }
 
