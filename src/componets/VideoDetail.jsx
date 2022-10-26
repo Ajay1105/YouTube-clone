@@ -13,15 +13,17 @@ const VideoDetail = () => {
  
   let a = [];
   fetchFromApi(`videos?part=snippet,statistics&id=${id}`)
-  .then((data) => a= data)
+  .then((data) => a= data.items[0])
  
  const [videoDetail, setVideoDetail] = useState(a);
 
  useEffect( async() => {
   await fetchFromApi(`videos?part=snippet,statistics&id=${id}`)
-  .then((data) =>{ console.log(data);
-    setVideoDetail(data.items[0])});
+  .then((data) =>{ console.log(data.items[0].snippet.title);
+    setVideoDetail(data)});
  }, [id]);
+ 
+ if(videoDetail==null) return 'Loading...'
 
   return(
   <Box minHeight="95vh">
@@ -30,7 +32,7 @@ const VideoDetail = () => {
      <Box sx={{width:'100%'}}>
       <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`} className="react-player" controls/>
       <Typography color="#fff" variant="h5" fontWeight="bold">
-      Title
+      videoDetail.items[0].snippet.title
       </Typography>
      </Box>
     </Box>
